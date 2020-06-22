@@ -1,36 +1,50 @@
+function calculaMatriz(imagem, alturaPersonagem, larguraPersonagem) {
+  let matriz = [];
+
+  for (let i=0; i<imagem.height; i+=alturaPersonagem) {
+    for (let j=0; j<imagem.width; j+=larguraPersonagem) {
+      matriz.push([j, i]);
+    }
+  }
+
+  return matriz;
+}
+
 class Personagem {
   constructor(imagem) {
     this.imagem = imagem;
-    this.matriz = [
-      [0, 0],
-      [220, 0],
-      [440, 0],
-      [660, 0],
-      [0, 270],
-      [220, 270],
-      [440, 270],
-      [660, 270],
-      [0, 540],
-      [220, 540],
-      [440, 540],
-      [660, 540],
-      [0, 810],
-      [220, 810],
-      [440, 810],
-      [660, 810],
-    ];
-    this.frameAtual = 0
+
+    this.alturaPersonagem = 270;
+    this.larguraPersonagem = 220;
+
+    this.matriz = calculaMatriz(imagem, this.alturaPersonagem, this.larguraPersonagem);
+
+    this.frameAtual = 0;
   }
-  
+
   exibe() {
-    image(this.imagem, 50, height-150, 110, 135, this.matriz[this.frameAtual][0], this.matriz[this.frameAtual][1], 220, 270);
-    
+    let xTela = 50;
+    let yTela = height - 150;
+
+    /* Parâmetros:
+      imagem
+      x e y para posicionar dentro do canvas
+      largura e altura da imagem no canvas
+      x e y para posicionar dentro do sprite
+      largura e altura do corte dentro do sprite
+    */
+    image(this.imagem, 
+      xTela, yTela, 
+      this.larguraPersonagem/2, this.alturaPersonagem/2,
+      this.matriz[this.frameAtual][0], this.matriz[this.frameAtual][1],
+      this.larguraPersonagem, this.alturaPersonagem);
+
     this.anima();
   }
-  
+
   anima() {
     this.frameAtual++;
-    
+
     if (this.frameAtual >= this.matriz.length)
       this.frameAtual = 0;
   }
