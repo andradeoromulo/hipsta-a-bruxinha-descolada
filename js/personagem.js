@@ -1,51 +1,39 @@
-function calculaMatriz(imagem, alturaPersonagem, larguraPersonagem) {
-  let matriz = [];
+class Personagem extends Animacao {
+  constructor(matriz, imagem, x, largura, altura, larguraSprite, alturaSprite) {
+    super(matriz, imagem, x, largura, altura, larguraSprite, alturaSprite);
 
-  for (let i=0; i<imagem.height; i+=alturaPersonagem) {
-    for (let j=0; j<imagem.width; j+=larguraPersonagem) {
-      matriz.push([j, i]);
-    }
+    this.yInicial = height - this.altura - 15;
+    this.y = this.yInicial;
+
+    this.gravidade = 3;
+    this.velocidadePulo = 0;
   }
 
-  return matriz;
-}
-
-class Personagem {
-  constructor(imagem) {
-    this.imagem = imagem;
-
-    this.alturaPersonagem = 270;
-    this.larguraPersonagem = 220;
-
-    this.matriz = calculaMatriz(imagem, this.alturaPersonagem, this.larguraPersonagem);
-
-    this.frameAtual = 0;
+  pula() {
+    this.velocidadePulo = -50;
+    somPulo.play();
   }
 
-  exibe() {
-    let xTela = 50;
-    let yTela = height - 150;
+  aplicaGravidade() {
+    this.y += this.velocidadePulo;
+    this.velocidadePulo += this.gravidade;
 
-    /* Parâmetros:
-      imagem
-      x e y para posicionar dentro do canvas
-      largura e altura da imagem no canvas
-      x e y para posicionar dentro do sprite
-      largura e altura do corte dentro do sprite
-    */
-    image(this.imagem, 
-      xTela, yTela, 
-      this.larguraPersonagem/2, this.alturaPersonagem/2,
-      this.matriz[this.frameAtual][0], this.matriz[this.frameAtual][1],
-      this.larguraPersonagem, this.alturaPersonagem);
-
-    this.anima();
+    if (this.y > this.yInicial)
+      this.y = this.yInicial;
   }
 
-  anima() {
-    this.frameAtual++;
+  estaColidindo(inimigo) {
+    const precisao = 0.7;
 
-    if (this.frameAtual >= this.matriz.length)
-      this.frameAtual = 0;
+    const colisao = collideRectRect(
+      this.x, this.y, 
+      this.largura * precisao, 
+      this.altura * precisao,
+      inimigo.x, inimigo.y,
+      inimigo.largura * precisao, 
+      inimigo.altura * precisao
+    );
+
+    return colisao;
   }
 }
