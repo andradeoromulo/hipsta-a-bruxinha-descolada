@@ -7,19 +7,26 @@ class Personagem extends Animacao {
 
     this.gravidade = 3;
     this.velocidadePulo = 0;
+    this.contadorPulo = 0;
   }
 
   pula() {
-    this.velocidadePulo = -50;
-    somPulo.play();
+    if (this.contadorPulo < 2) {
+      this.velocidadePulo = -30;
+      somPulo.play();
+
+      this.contadorPulo++;
+    }
   }
 
   aplicaGravidade() {
     this.y += this.velocidadePulo;
     this.velocidadePulo += this.gravidade;
 
-    if (this.y > this.yInicial)
+    if (this.y > this.yInicial) {
       this.y = this.yInicial;
+      this.contadorPulo = 0;
+    }
   }
 
   estaColidindo(inimigo) {
