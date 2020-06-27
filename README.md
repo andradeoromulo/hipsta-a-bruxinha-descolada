@@ -13,4 +13,5 @@ O jogo foi programado em JavaScript com o suporte da da [j5.js](https://p5js.org
 ## 📷 Screenshots
 ![Screenshot da Tela Inicial](https://github.com/andradeoromulo/hipsta-a-bruxinha-descolada/blob/master/screenshots/screenshot-telaInicial.png)
 ![Screenshot da Fase 1](https://github.com/andradeoromulo/hipsta-a-bruxinha-descolada/blob/master/screenshots/screenshot-fase01.png)
+![Screenshot de Game Over](https://github.com/andradeoromulo/hipsta-a-bruxinha-descolada/blob/master/screenshots/screenshot-gameover.png)
 
