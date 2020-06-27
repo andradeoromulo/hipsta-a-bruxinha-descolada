@@ -1,7 +1,7 @@
 {
 "configuracoes": {
-    "vidaMaximo": 5,
-    "vidaInicial": 5
+    "vidaMaximo": 3,
+    "vidaInicial": 3
 },
 "mapa": [
     {
