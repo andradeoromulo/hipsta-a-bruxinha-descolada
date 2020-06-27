@@ -16,6 +16,10 @@ class Pontuacao {
         return ("00000" + parseInt(this.pontos)).slice(-5);
     }
 
+    zerar() {
+        this.pontos = 0;
+    }
+
     adicionarPonto() {
         this.pontos += 0.2;
     }
